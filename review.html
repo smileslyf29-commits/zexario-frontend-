@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviews - Zexario</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ================= ROOT COLORS ================= */
+:root {
+  --mustard: #D4A017;
+  --black: #111;
+  --white: #fff;
+}
+
+/* ================= GLOBAL ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--white);
+  color: var(--black);
+}
+
+/* ================= NAVBAR ================= */
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 13px;
+  border-bottom: 1.4px solid var(--mustard);
+  z-index: 1000;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo-container img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.4px solid var(--mustard);
+}
+
+.brand-name {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.right-nav {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.cart-container {
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.cart-count {
+  color: var(--mustard);
+  font-size: 15px;
+}
+
+.menu-toggle {
+  width: 32px;
+  height: 32px;
+  background: var(--mustard);
+  border-radius: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.menu-toggle i {
+  color: var(--black);
+}
+
+.navbar {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: var(--white);
+  border: 1px solid var(--mustard);
+  display: none;
+  flex-direction: column;
+  width: 180px;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 1001;
+}
+
+.navbar.active {
+  display: flex;
+}
+
+.navbar a {
+  padding: 11px 12px;
+  text-decoration: none;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.navbar a i {
+  color: var(--mustard);
+  font-size: 16px;
+}
+
+.navbar a:hover {
+  background: var(--mustard);
+  color: var(--white);
+}
+
+.navbar a:hover i {
+  color: var(--white);
+}
+
+/* ================= HERO ================= */
+.hero {
+  height: 50vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("review.jpeg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 60px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 700px;
+  padding: 0 20px;
+}
+
+.hero-content h1 {
+  color: var(--white);
+  font-size: 44px;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.hero-content h1 span {
+  color: var(--mustard);
+}
+
+.hero-content p {
+  color: #f1f1f1;
+  font-size: 18px;
+}
+
+/* ================= REVIEW FORM ================= */
+.review-section {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.review-section h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 25px;
+  color: var(--mustard);
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.review-form textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--mustard);
+  font-size: 16px;
+  resize: none;
+}
+
+/* Star rating */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 28px;
+  color: #ccc;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+  color: var(--mustard);
+}
+
+.review-form button {
+  background: var(--mustard);
+  color: var(--black);
+  padding: 12px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.review-form button:hover {
+  background: var(--black);
+  color: var(--mustard);
+  border: 1px solid var(--mustard);
+}
+
+/* ================= DISPLAY REVIEWS ================= */
+.reviews-display {
+  margin-top: 40px;
+  border-top: 2px solid var(--mustard);
+  padding-top: 20px;
+}
+
+.review-card {
+  border: 1px solid #eee;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background: #f9f9f9;
+}
+
+.review-card h4 {
+  margin-bottom: 8px;
+  color: var(--mustard);
+}
+
+.review-card p {
+  font-size: 15px;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 35px 20px;
+  border-top: 3px solid var(--mustard);
+}
+
+footer h2 {
+  color: var(--mustard);
+  margin-bottom: 15px;
+}
+
+.footer-item {
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+.footer-item i {
+  color: var(--mustard);
+  margin-right: 8px;
+}
+
+footer a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--mustard);
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+  .hero-content h1 {
+    font-size: 30px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="top-navbar">
+  <div class="logo-container">
+    <img src="logo.jpeg" alt="Lunora Logo">
+    <span class="brand-name">Zexario</span>
+  </div>
+
+  <div class="right-nav">
+    <div class="cart-container" onclick="openCart()">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-count">(0)</span>
+    </div>
+
+    <div class="menu-toggle" id="menuToggle">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <!-- TOGGLE MENU -->
+    <nav class="navbar" id="bottomNav">
+      <a href="home.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+      <a href="review.html"><i class="fa-solid fa-star"></i> Reviews</a>
+      <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+    </nav>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <h1>Share Your <span>Experience</span></h1>
+    <p>Your feedback helps us improve and grow. Leave a review below!</p>
+  </div>
+</header>
+
+<!-- REVIEW FORM -->
+<section class="review-section">
+  <h2>Customer Reviews</h2>
+  <form class="review-form" onsubmit="submitReview(event)">
+    
+    <div class="star-rating">
+      <input type="radio" name="rating" id="star5" value="5" required><label for="star5" title="5 stars">★</label>
+      <input type="radio" name="rating" id="star4" value="4"><label for="star4" title="4 stars">★</label>
+      <input type="radio" name="rating" id="star3" value="3"><label for="star3" title="3 stars">★</label>
+      <input type="radio" name="rating" id="star2" value="2"><label for="star2" title="2 stars">★</label>
+      <input type="radio" name="rating" id="star1" value="1"><label for="star1" title="1 star">★</label>
+    </div>
+
+    <textarea placeholder="Write your review..." required></textarea>
+    <button type="submit">Submit Review</button>
+  </form>
+
+  <div class="reviews-display" id="reviewsDisplay">
+    <!-- Reviews will appear here -->
+  </div>
+</section>
+
+<footer>
+  <h2>Contact Us</h2>
+
+  <div class="footer-item">
+    <i class="fa-solid fa-envelope"></i>
+    <a href="mailto:giftnest10@gmail.com">giftnest10@gmail.com</a>
+  </div>
+
+  <div class="footer-item">
+    <i class="fa-solid fa-phone"></i>
+    <a href="tel:1244687979809">1244687979809</a>
+  </div>
+
+  <div class="footer-item">
+    <i class="fa-brands fa-instagram"></i>
+    <a href="https://www.instagram.com/zexario_01" target="_blank" rel="noopener noreferrer">@zexario_01</a>
+  </div>
+
+  <div class="footer-item">
+    <i class="fa-brands fa-tiktok"></i>
+    <a href="https://www.tiktok.com/@zexario10" target="_blank" rel="noopener noreferrer">@zexario10</a>
+  </div>
+
+  <p style="margin-top:15px;">&copy; 2026 zexario</p>
+</footer>
+
+<script>
+menuToggle.onclick = () => bottomNav.classList.toggle("active");
+
+function openCart() {
+  alert("Cart coming soon!");
+}
+
+// Handle review submission
+function submitReview(e) {
+  e.preventDefault();
+  
+  const form = e.target;
+  const rating = form.querySelector('input[name="rating"]:checked').value;
+  const message = form.querySelector('textarea').value;
+
+  const reviewContainer = document.getElementById('reviewsDisplay');
+  
+  const reviewCard = document.createElement('div');
+  reviewCard.className = 'review-card';
+  reviewCard.innerHTML = `
+    <h4>${"★".repeat(rating)}${"☆".repeat(5 - rating)}</h4>
+    <p>${message}</p>
+  `;
+  
+  reviewContainer.prepend(reviewCard); // Add newest review on top
+  alert("Thank you! Your review has been submitted.");
+  form.reset();
+}
+</script>
+
+</body>
+</html>

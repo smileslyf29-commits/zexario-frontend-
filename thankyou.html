@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmed | Zexario</title>
+
+  <link rel="icon" href="logo.jpeg">
+
+  <style>
+    :root {
+      --mustard: #D4A017;
+      --black: #0d0d0d;
+      --white: #ffffff;
+      --gray: #cccccc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1a1a1a, var(--black));
+      color: var(--white);
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .thankyou-box {
+      background: rgba(20, 20, 20, 0.9);
+      padding: 45px 40px;
+      border-radius: 22px;
+      border: 2px solid var(--mustard);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      max-width: 420px;
+      animation: fadeUp 0.9s ease forwards;
+    }
+
+    .brand {
+      font-size: 14px;
+      letter-spacing: 3px;
+      color: var(--mustard);
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      margin-bottom: 15px;
+    }
+
+    h1 span {
+      color: var(--mustard);
+    }
+
+    p {
+      font-size: 1.05rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .back-btn {
+      margin-top: 30px;
+      padding: 14px 34px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      background: var(--mustard);
+      color: var(--black);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+    }
+
+    .back-btn:hover {
+      background: var(--white);
+      color: var(--black);
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeUp {
+      from {
+        transform: translateY(80px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* CONFETTI */
+    .confetti {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      background: var(--mustard);
+      animation: fall linear infinite;
+      opacity: 0.9;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="thankyou-box">
+    <div class="brand">ZEXARIO</div>
+
+    <h1>Order <span>Confirmed</span></h1>
+
+    <p>
+      Thank you for choosing Zexario.<br>
+      Your order has been successfully placed and our team will contact you shortly to confirm the details.
+    </p>
+
+    <button class="back-btn" onclick="window.location.href='home.html'">
+      Continue Shopping
+    </button>
+  </div>
+
+  <script>
+    /* BRAND CONFETTI */
+    for (let i = 0; i < 45; i++) {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.animationDuration = (2.5 + Math.random() * 2) + "s";
+      confetti.style.opacity = Math.random();
+      confetti.style.backgroundColor =
+        Math.random() > 0.5 ? "#D4A017" : "#ffffff";
+      document.body.appendChild(confetti);
+    }
+  </script>
+
+</body>
+</html>

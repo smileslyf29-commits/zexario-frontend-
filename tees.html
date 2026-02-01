@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T-Shirts | Zexario</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --mustard: #D4A017;
+  --black: #111;
+  --white: #fff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--white);
+  color: var(--black);
+  padding-top: 60px;
+}
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 13px;
+  border-bottom: 1.4px solid var(--mustard);
+  z-index: 1000;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo-container img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.4px solid var(--mustard);
+}
+
+.brand-name {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.right-nav {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.cart-container {
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.cart-count {
+  color: var(--mustard);
+  font-size: 15px;
+}
+
+.menu-toggle {
+  width: 32px;
+  height: 32px;
+  background: var(--mustard);
+  border-radius: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.menu-toggle i {
+  color: var(--black);
+}
+.navbar {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: var(--white);
+  border: 1px solid var(--mustard);
+  display: none;
+  flex-direction: column;
+  width: 180px;
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 1001;
+}
+
+.navbar.active {
+  display: flex;
+}
+
+.navbar a {
+  padding: 11px 12px;
+  text-decoration: none;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.navbar a i {
+  color: var(--mustard);
+  font-size: 16px;
+}
+
+.navbar a:hover {
+  background: var(--mustard);
+  color: var(--white);
+}
+
+.navbar a:hover i {
+  color: var(--white);
+}
+
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  padding: 0 25px 60px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.product-card {
+  border: 2px solid var(--mustard);
+  border-radius: 15px;
+  padding: 10px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.product-card button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  border: none;
+  background: var(--mustard);
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.btn {
+  display: inline-block;
+  background: var(--mustard);       /* Mustard background */
+  color: var(--black);              /* Black text */
+  font-weight: bold;
+  text-decoration: none;            /* Remove underline */
+  padding: 10px 20px;               /* Button padding */
+  border-radius: 30px;              /* Rounded pill shape */
+  transition: all 0.3s ease;        /* Smooth hover effect */
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--black);         /* Black background on hover */
+  color: var(--mustard);            /* Mustard text on hover */
+  border: 2px solid var(--mustard); /* Optional: adds border effect */
+}
+</style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+<nav class="top-navbar">
+  <div class="logo-container">
+    <img src="logo.jpeg" alt="Zexario Logo">
+    <span class="brand-name">Zexario</span>
+  </div>
+
+  <div class="right-nav">
+    <div class="cart-container" onclick="openCart()">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-count">(0)</span>
+    </div>
+
+    <div class="menu-toggle" id="menuToggle">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <nav class="navbar" id="bottomNav">
+      <a href="home.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+      <a href="review.html"><i class="fa-solid fa-star"></i> Reviews</a>
+      <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+    </nav>
+  </div>
+</nav>
+
+
+
+<h1 style="text-align:center;margin:30px 0;">T-Shirts Collection</h1>
+
+<section class="products-grid">
+
+  <div class="product-card">
+    <img src="black tee.jpeg">
+    <h3> Black Tee</h3>
+    <p><strong>PKR 1300</strong></p>
+  <a href="tees1.html" class="btn">Buy Now</a>
+  </div>
+  
+  <div class="product-card">
+    <img src="White tee.jpeg">
+    <h3>White Tee</h3>
+    <p><strong>PKR 1300</strong></p>
+    <a href="tees2.html" class="btn">Buy Now</a>
+  </div>
+  
+  <div class="product-card">
+    <img src="Maron Tee.jpeg">
+    <h3>Maroon Tee</h3>
+    <p><strong>PKR 1300</strong></p>
+    <a href="tees3.html" class="btn">Buy Now</a>
+  </div>
+  
+  <div class="product-card">
+    <img src="Navy Tee.jpeg">
+    <h3>Navy Tee</h3>
+    <p><strong>PKR 1300</strong></p>
+    <a href="tees4.html" class="btn">Buy Now</a>
+  </div>
+  
+  <div class="product-card">
+    <img src="grey tee.jpeg">
+    <h3>Grey Tee</h3>
+    <p><strong>PKR 1300</strong></p>
+    <a href="tees5.html" class="btn">Buy Now</a>
+  </div>
+
+</section>
+
+<script>
+  /* ================= NAVBAR TOGGLE (SAFE) ================= */
+const menuToggle = document.getElementById("menuToggle");
+const bottomNav = document.getElementById("bottomNav");
+
+if (menuToggle && bottomNav) {
+  menuToggle.onclick = () => {
+    bottomNav.classList.toggle("active");
+  };
+}
+/* BUY NOW — FIXED */
+function buyNow(name, price, image) {
+  const selectedProduct = { name, price, image };
+  localStorage.setItem("selectedProduct", JSON.stringify(selectedProduct));
+  window.location.href = "tees1.html";
+}
+</script>
+
+</body>
+</html>
