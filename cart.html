@@ -339,6 +339,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const easyInstructions = document.getElementById("easyInstructions");
   const codMessage = document.getElementById("codMessage");
 
+  // Use localStorage for cart
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   function updateCartCount() {
@@ -410,7 +411,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       try {
-        const res = await fetch("http://localhost:5000/checkout", {
+        const res = await fetch("https://zexario-backend.onrender.com/checkout", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
@@ -420,7 +421,8 @@ document.addEventListener("DOMContentLoaded", () => {
           localStorage.removeItem("cart");
           window.location.href = "thankyou.html";
         } else {
-          alert("Order failed");
+          const errMsg = await res.text();
+          alert("Order failed: " + errMsg);
         }
       } catch (err) {
         console.error(err);
@@ -437,3 +439,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
