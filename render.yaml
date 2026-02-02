@@ -1,0 +1,7 @@
+services:
+  - type: static
+    name: zexario-frontend
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /home.html
